@@ -134,11 +134,13 @@
     display: block;
 }
 
-.carousel .carousel_item img {
+
+/*.carousel .carousel_item img {
     width: 100%;
     max-width: 400px;
     height: auto;
 }
+*/
 
 .carousel .carousel_actions {
     display: flex;
@@ -149,15 +151,15 @@
 }
 
 .carousel .carousel_actions button {
-    border-radius: 50px;
+    border-radius: 100px;
     border: 0;
     font-weight: bold;
 }
 
 .carousel .carousel_actions button#carousel_prev {
-    margin-left: 20px;
+    margin-left: 40px;
 }
 
 .carousel .carousel_actions button#carousel_next {
-    margin-left: 20px;
+    margin-left: 40px;
 }
