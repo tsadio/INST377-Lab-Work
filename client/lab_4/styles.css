@@ -120,6 +120,8 @@
 }
 
 .carousel {
+    display: flex;
+    justify-content: center;
     overflow: hidden;
     max-width: 400px;
     position: relative;
