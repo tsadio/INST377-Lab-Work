@@ -1,14 +1,15 @@
 let slidePosition = 0;
-const slides = document.querySelectorAll('carousel_item');
-const totalSlides = slides.clientHeight;
+const slides = document.getElementsByClassName('carousel_item');
+const totalSlides = slides.length;
 
-document.querySelector('carousel_buton--next')
-    .addEventListerner('click', function() {
+document.
+getElementById('carousel_buton--next')
+    .addEventListener('click', function() {
         moveToNextSlide();
     });
 
-document.querySelector('carousel_buton--next')
-    .addEventListerner('click', function() {
+document.getElementById('carousel_buton--prev')
+    .addEventListener('click', function() {
         moveToPrevSlide();
     });
 
