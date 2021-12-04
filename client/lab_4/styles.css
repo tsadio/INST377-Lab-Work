@@ -123,7 +123,7 @@
             /*display: flex;
     justify-content: center;*/
             overflow: hidden;
-            max-width: 400px;
+            max-width: 600px;
             position: relative;
         }
         
@@ -135,12 +135,12 @@
         .carousel .carousel_item--visible {
             display: block;
         }
-        /*.carousel .carousel_item img {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-}
-*/
+        
+        .carousel .carousel_item img {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+        }
         
         .carousel .carousel_actions {
             display: flex;
@@ -151,15 +151,15 @@
         }
         
         .carousel .carousel_actions button {
-            border-radius: 100px;
-            border: 25;
+            border-radius: 50px;
+            border: 0;
             font-weight: bold;
         }
         
-        .carousel .carousel_actions button#carousel_prev {
+        .carousel .carousel_actions button#carousel_button--prev {
             margin-left: 40px;
         }
         
-        .carousel .carousel_actions button#carousel_next {
+        .carousel .carousel_actions button#carousel_button--next {
             margin-left: 40px;
         }
