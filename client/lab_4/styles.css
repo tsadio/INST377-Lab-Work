@@ -152,7 +152,7 @@
         
         .carousel .carousel_actions button {
             border-radius: 100px;
-            border: 0;
+            border: 25;
             font-weight: bold;
         }
         
