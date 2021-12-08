@@ -1,40 +1,87 @@
-let slidePosition = 0;
-const slides = document.querySelectorAll('.carousel_item');
-const totalSlides = slides.length;
+/* eslint-disable indent */
+document.addEventListener('DOMContentLoaded', () => {
+    const bird = document.querySelector('.bird')
+    const gameDisplay = document.querySelector('.game-container')
+    const ground = document.querySelector('.ground')
 
-document.querySelector('#carousel_button--next')
-    .addEventListener('click', function() {
-        moveToNextSlide();
-    });
+    let birdLeft = 220
+    let BirdBottom = 100
+    let gravity = 2
+    let isGameOver = false
+    let gap = 450
 
-document.querySelector('#carousel_button--prev')
-    .addEventListener('click', function() {
-        moveToPrevSlide();
-    });
+    function startGame() {
+        BirdBottom -= gravity
+        bird.style.bottom = birdBottom + 'px'
+        bird.style.left = birdLeft + 'px'
+    }
+    let gameTimerId = setInterval(startGame, 20)
 
-function updateSlidePosition() {
-    for (let slide of slides) {
-        slide.classList.remove('carousel_item--visible');
-        slide.classList.add('carousel_item--hidden');
+    function control(e) {
+        if (e.keyCode === 32) {
+            jump()
+        }
     }
 
-    slides[slidePosition].classList.add('carousel_item--visible');
-}
-
-function moveToNextSlide() {
-    if (slidePosition === totalSlides - 1) {
-        slidePosition = 0;
-    } else {
-        slidePosition++;
+    function jump() {
+        if (birdBottom < 500)
+            birdBottom += 50
+        bird.style.bottom = birdBottom + 'px'
+        console.log(birdBottom)
     }
-    updateSlidePosition();
-}
+    document.addEventListener('keyup', control)
 
-function moveToPrevSlide() {
-    if (slidePosition === 0) {
-        slidePosition = totalSlides - 1;
-    } else {
-        slidePosition--;
+    function generateObstacle() {
+        let obstacleLeft = 500
+        let randomHeight = Math.random() * 60
+        let obstacleBottom = randomHeight
+        const obstacle = document.createElement('div')
+        const topObstacle = document.createElement('div')
+        if (!isGameOver) {
+            obstacle.classList.add('obstacle')
+            topObstacle.classList.add('topObstacle')
+        }
+        gameDisplay.appendChild(obstacle)
+        gameDisplay.appendChild(topObstacle)
+        obstacle.style.left = obstacleLeft + 'px'
+        topObstacle.style.left = obstacle + 'px'
+        obstacle.style.bottom = obstacleBottom + 'px'
+        topObstacle.style.bottom = obstacleBottom + gap + 'px'
+
+        function moveObstacle() {
+            obstacleLeft -= 2
+            obstacle.style.left = obstacleLeft + 'px'
+            topObstacle.style.left = obstacleLeft + 'px'
+
+            if (obstacleLeft === -60) {
+                clearInterval(timerId)
+                gameDisplay.removeChild(obstacle)
+                gameDisplay.removeChild(topObstacle)
+            }
+
+            if (obstacleLeft > 200 && obstacleLeft < 280 &&
+                birdLeft === 220 &&
+                (birdBottom < obstacleBottom + 155 ||
+                    birdBottom > obstacleBottom + gap - 200) ||
+                birdBottom === 0) {
+                gameOver()
+                clearInterval(timerId)
+            }
+        }
+
+        let timerId = setInterval(moveObstacle, 20)
+        if (!isGameOver) setTimeout(generateObstacle, 3000)
+
     }
-    updateSlidePosition();
-}
+
+    generateObstacle()
+
+    function gameOver() {
+        clearInterval(gameTimerId)
+        isGameOver = true
+        document.removeEventListener('keyup', control)
+
+    }
+
+
+})
