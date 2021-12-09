@@ -1,74 +1,20 @@
-body {
-    display: flex;
+.grid {
+    width: 400px;
+    height: 600px;
+    background-color: yellow;
+    position: relative;
 }
 
-.game-container {
-    width: 500px;
-    height: 700px;
-    position: absolute;
-    left: 80px;
-}
-
-.border-left {
-    width: 80px;
-    height: 790px;
-    position: absolute;
-    background-color: white;
-    z-index: +2;
-}
-
-.border-right {
-    width: 80px;
-    height: 790px;
-    position: absolute;
-    background-color: white;
-    z-index: +2;
-    left: 580px;
-}
-
-.border-top {
-    width: 660px;
-    height: 50px;
-    position: absolute;
-    background-color: white;
-    z-index: +2;
-    top: -50px;
-}
-
-.sky {
-    background-color: skyblue;
-    width: 500px;
-    height: 580px;
-    position: absolute;
-}
-
-.ground {
-    background-color: brown;
-    width: 500px;
-    height: 150px;
-    position: absolute;
-    top: 580px;
-    z-index: +1;
-}
-
-.bird {
-    background-color: orange;
-    position: absolute;
+.doodler {
     width: 60px;
-    height: 45px;
-}
-
-.obstacle {
-    background-color: blue;
-    width: 60px;
-    height: 300px;
+    height: 85px;
+    background-color: red;
     position: absolute;
 }
 
-.topObstacle {
-    background-color: blue;
-    transform: rotate(180deg);
-    width: 60px;
-    height: 300px;
+.platform {
+    width: 85px;
+    height: 15px;
+    background-color: green;
     position: absolute;
 }
