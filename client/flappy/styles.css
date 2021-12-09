@@ -4,7 +4,7 @@ body {
 
 .game-container {
     width: 500px;
-    height: 700px;
+    height: 730px;
     position: absolute;
     left: 80px;
 }
@@ -36,14 +36,14 @@ body {
 }
 
 .sky {
-    background-color: skyblue;
+    background-image: skyblue;
     width: 500px;
     height: 580px;
     position: absolute;
 }
 
 .ground {
-    background-color: brown;
+    background-image: brown;
     width: 500px;
     height: 150px;
     position: absolute;
@@ -52,23 +52,62 @@ body {
 }
 
 .bird {
-    background-color: orange;
+    background-image: yellow;
     position: absolute;
     width: 60px;
     height: 45px;
+    left: 220px;
+    bottom: 100px;
 }
 
 .obstacle {
-    background-color: blue;
+    background-image: green;
     width: 60px;
     height: 300px;
     position: absolute;
 }
 
 .topObstacle {
-    background-color: blue;
+    background-image: green;
     transform: rotate(180deg);
     width: 60px;
     height: 300px;
     position: absolute;
+}
+
+@keyframes slideright {
+    from {
+        background-position: 10000%;
+    }
+    to {
+        background-position: 0%;
+    }
+}
+
+@-webkit-keyframes slideright {
+    from {
+        background-position: 10000%;
+    }
+    to {
+        background-position: 0%;
+    }
+}
+
+.ground-container {
+    height: 150px;
+    width: 580px;
+    left: 80px;
+    position: absolute;
+}
+
+.ground-moving {
+    position: absolute;
+    top: 580px;
+    height: 150px;
+    background-image: brown;
+    background-repeat: repeat-x;
+    animation: slideright 100s infinite linear;
+    -webkit-animation: slideright 100s infinite linear;
+    width: 100%;
+    z-index: +1;
 }
