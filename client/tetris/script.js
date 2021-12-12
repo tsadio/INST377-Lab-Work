@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
 
     let currentPosition = 4
-    let currentRotation = 0
+    let currentRotation = theTetrominoes[0][0]
 
     function draw() {
         current.forEach(index => {
