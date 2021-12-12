@@ -86,4 +86,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    //move the tetromino on the left or right
+    function moveLeft() {
+        undraw()
+        const isAtLeftEdge = current.some(index => (currentPosition + index) % width === 0)
+        if (!isAtLeftEdge) currentPosition -= 1
+        if (current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
+            currentPosition += 1
+        }
+        draw()
+    }
+
+
+    function moveRight() {
+        undraw()
+        const isAtRightEdge = current.some(index => (currentPosition + index) % width === width - 1)
+        if (!isAtRightEdge) currentPosition += 1
+        if (current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
+            currentPosition -= 1
+        }
+        draw()
+    }
+
 })
