@@ -19,6 +19,10 @@
     background-color: blue;
 }
 
+.button {
+    display: flex;
+}
+
 .mini-grid {
     margin-left: 50px;
     width: 80px;
