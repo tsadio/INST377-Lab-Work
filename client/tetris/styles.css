@@ -1,29 +1,18 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    font-family: ‘Segoe UI’, Candara, ‘Bitstream Vera Sans’, ‘DejaVu Sans’, ‘Bitsream Vera Sans’, ‘Trebuchet MS’, Verdana, ‘Verdana Ref’, sans-serif;
-    background-color: darkslategray;
-}
-
-
-/* Page Layout */
-
-.columns {
+.grid {
+    width: 200px;
+    height: 400px;
     display: flex;
     flex-wrap: wrap;
+    background-color: yellow;
 }
 
-.wrapper {
-    display: flex;
+.grid div {
+    height: 20px;
+    width: 20px;
 }
 
-.container {
-    max-width: 960px;
-    margin-top: 25px;
+.tetromino {
+    background-color: blue;
 }
+
+.grid {}
