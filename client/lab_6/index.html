@@ -37,12 +37,13 @@
             .then(data => cities.push(...data))
 
 
-        function findMatches(matchWorld, institutions) {
-            return institutions.filter(place => {
+        function findMatches(matchWorld, cities) {
+            return cities.filter(place => {
                 const regex = new RegExp(matchWorld, 'gi');
-                return place.institution.match(regex)
+                return place.city.match(regex) || place.state.match(regex);
             });
         }
+
 
         function display() {
             const matchArray = findMatch(this.value, institutions);
