@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Lab 6: Theophile Sadio Nanzo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css" />
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" charset="utf-8"></script>
+</head>
+
+<body>
+
+
+    <section class="columns is-mobile is-centered notification is-medium">
+        <div class="column is-5 notification is-medium">
+
+            <form class="search-form is-5">
+                <div class="notification is-info">
+                    <input type="text" class="search" placeholder="States or Cities">
+                    <ul class="suggestions">
+                        <ul><strong>Filter by States or Cities</strong></ul>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </section>
+
+
+    <script>
+        const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+
+        const cities = [];
+
+        fetch(endpoint)
+            .then(college => college.json())
+            .then(data => institutions.push(...data))
+
+
+        function findMatches(matchWorld, institutions) {
+            return institutions.filter(place => {
+                const regex = new RegExp(matchWorld, 'gi');
+                return place.institution.match(regex)
+            });
+        }
+
+        function display() {
+            const matchArray = findMatch(this.value, institutions);
+            const html = matchArray.map(place => {
+                const regex = new RegExp(this.value, 'gi');
+                const instName = place.institution.replace(regex, '<span class="hl">${this.value}</span>');
+                return '<li> <span class = "name">${institution}, ${place.institution} </span>';
+            }).join('');
+
+            suggestions.innexHTML = html;
+        }
+        const searchInput = document.querySelector('.search');
+        const suggestions = document.querySelector('.suggestions');
+
+        searchInput.addEventListener('change', display);
+        searchInput.addEventListener('keyup', display);
+
+
+
+
+
+
+
+
+        function findMatches(wordToMatch, cities) {
+            return cities.filter(place => {
+                const regex = new RegExp(wordToMatch, 'gi');
+                return place.city.match(regex) || place.state.match(regex);
+            });
+        }
+
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); // WHAT THE F*??!???!!!!
+        }
+
+        function displayMatches() {
+            const matchArray = findMatches(this.value, cities);
+            const html = matchArray.map(place => {
+                const regex = new RegExp(this.value, 'gi');
+                const cityName = place.city.replace(regex, `<span class="hl">${this.value}</span>`);
+                const stateName = place.state.replace(regex, `<span class="hl">${this.value}</span>`);
+                return `
+      <li>
+        <span class="name">${cityName}, ${stateName}</span>
+        <span class="population">${numberWithCommas(place.population)}</span>
+      </li>`
+            }).join('');
+            suggestions.innerHTML = html;
+        }
+
+        searchInput.addEventListener('change', displayMatches);
+        searchInput.addEventListener('keyup', displayMatches);
+    </script>
+
+</body>
+
+</html>
