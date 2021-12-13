@@ -10,18 +10,15 @@
 
 <body>
 
-
-
-
     <form class="search-form">
 
         <section class="columns is-mobile is-centered notification is-medium">
             <div class="column is-5 notification is-medium">
                 <div class="notification is-info">
-                    <input type="text" class="search" placeholder="States or Cities">
+                    <input type="text" class="search" placeholder="City">
                     <ul class="suggestions">
                         <li>
-                            <strong>Filter by States or Cities</strong>
+                            Filter By City
                         </li>
                     </ul>
                 </div>
@@ -29,48 +26,44 @@
         </section>
     </form>
 
-
-
     <script>
-        const endpoint = "https: //gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json";
+        const endpoint = 'https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json';
         const cities = [];
-        const searchInput = document.querySelector('.search');
-        const suggestions = document.querySelector('.suggestions');
 
         fetch(endpoint)
             .then(new_file => new_file.json())
-            .then(data => cities.push(...data))
+            .then(data => cities.push(...data));
 
-        function findMatch(matchWorld, cities) {
+        function find_matches(match, cities) {
             return cities.filter(place => {
-                const regex = new RegExp(matchWorld, 'gi');
-                return place.city.match(regex) || place.state.match(regex);
+                const regex = new RegExp(match, 'gi');
+                return place.city.match(regex);
             });
         }
 
-
         function numberWithCommas(x) {
-            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); // WHAT THE F*??!???!!!!
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         }
 
-        function display() {
-            const matchArray = findMatch(this.value, cities);
+        function display_matches() {
+            const matchArray = find_matches(this.value, cities);
             const html = matchArray.map(place => {
                 const regex = new RegExp(this.value, 'gi');
-                const name_city = place.city.replace(regex, `<span class="hl">${this.value}</span>`);
-                const name_state = place.state.replace(regex, `<span class="hl">${this.value}</span>`);
-                return `<li> 
-                            <span class="name">${name_city}, ${name_state}</span>
-                            <span class="population">${numberWithCommas(place.population)}</span>
-                        </li>`
+                const city_name = place.city.replace(regex, `<span class="hl">${this.value}</span>`);
+
+                return `<li><span class="name">${city_name}</span>
+    <span class="name">${numberWithCommas(place.name)}</span>
+    <span class="category">${numberWithCommas(place.category)}</span>
+      </li>`
             }).join('');
-            suggestions.innexHTML = html;
+            suggestions.innerHTML = html;
         }
 
 
-
-        searchInput.addEventListener('change', display);
-        searchInput.addEventListener('keyup', display);
+        const searchInput = document.querySelector('.search');
+        const suggestions = document.querySelector('.suggestions');
+        searchInput.addEventListener('change', display_matches);
+        searchInput.addEventListener('keyup', display_matches);
     </script>
 
 </body>
