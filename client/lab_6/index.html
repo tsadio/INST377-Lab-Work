@@ -33,8 +33,8 @@
         const cities = [];
 
         fetch(endpoint)
-            .then(college => college.json())
-            .then(data => institutions.push(...data))
+            .then(new_file => new_file.json())
+            .then(data => cities.push(...data))
 
 
         function findMatches(matchWorld, institutions) {
