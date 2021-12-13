@@ -64,6 +64,18 @@
 
 
 
+        fetch(endpoint) // returns a promise
+            .then(res => res.json()) // also returns a promise
+            .then(data => cities.push(...data)); // return an array of objects, `...` so it's not nested
+
+        function findMatches(wordToMatch, cities) {
+            return cities.filter(place => {
+                const regex = new RegExp(wordToMatch, 'gi');
+                return place.city.match(regex) || place.state.match(regex);
+            });
+        }
+
+
 
 
 
