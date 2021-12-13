@@ -6,36 +6,40 @@
     <title>Lab 6: Theophile Sadio Nanzo</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css" />
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js" charset="utf-8"></script>
 </head>
 
 <body>
 
 
-    <section class="columns is-mobile is-centered notification is-medium">
-        <div class="column is-5 notification is-medium">
 
-            <form class="search-form is-5">
+
+    <form class="search-form">
+
+        <section class="columns is-mobile is-centered notification is-medium">
+            <div class="column is-5 notification is-medium">
                 <div class="notification is-info">
                     <input type="text" class="search" placeholder="States or Cities">
                     <ul class="suggestions">
-                        <ul><strong>Filter by States or Cities</strong></ul>
+                        <li>
+                            <strong>Filter by States or Cities</strong>
+                        </li>
                     </ul>
                 </div>
-            </form>
-        </div>
-    </section>
+            </div>
+        </section>
+    </form>
+
 
 
     <script>
-        const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
-
+        const endpoint = "https: //gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json";
         const cities = [];
+        const searchInput = document.querySelector('.search');
+        const suggestions = document.querySelector('.suggestions');
 
         fetch(endpoint)
             .then(new_file => new_file.json())
             .then(data => cities.push(...data))
-
 
         function findMatch(matchWorld, cities) {
             return cities.filter(place => {
@@ -45,6 +49,9 @@
         }
 
 
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); // WHAT THE F*??!???!!!!
+        }
 
         function display() {
             const matchArray = findMatch(this.value, cities);
@@ -61,10 +68,6 @@
         }
 
 
-
-
-        const searchInput = document.querySelector('.search');
-        const suggestions = document.querySelector('.suggestions');
 
         searchInput.addEventListener('change', display);
         searchInput.addEventListener('keyup', display);
