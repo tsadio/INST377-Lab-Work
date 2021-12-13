@@ -37,7 +37,7 @@
             .then(data => cities.push(...data))
 
 
-        function findMatches(matchWorld, cities) {
+        function findMatch(matchWorld, cities) {
             return cities.filter(place => {
                 const regex = new RegExp(matchWorld, 'gi');
                 return place.city.match(regex) || place.state.match(regex);
@@ -45,36 +45,29 @@
         }
 
 
+
         function display() {
-            const matchArray = findMatch(this.value, institutions);
+            const matchArray = findMatch(this.value, cities);
             const html = matchArray.map(place => {
                 const regex = new RegExp(this.value, 'gi');
-                const instName = place.institution.replace(regex, '<span class="hl">${this.value}</span>');
-                return '<li> <span class = "name">${institution}, ${place.institution} </span>';
+                const name_city = place.city.replace(regex, `<span class="hl">${this.value}</span>`);
+                const name_state = place.state.replace(regex, `<span class="hl">${this.value}</span>`);
+                return `<li> 
+                            <span class="name">${name_city}, ${name_state}</span>
+                            <span class="population">${numberWithCommas(place.population)}</span>
+                        </li>`
             }).join('');
-
             suggestions.innexHTML = html;
         }
+
+
+
+
         const searchInput = document.querySelector('.search');
         const suggestions = document.querySelector('.suggestions');
 
         searchInput.addEventListener('change', display);
         searchInput.addEventListener('keyup', display);
-
-
-
-
-
-        fetch(endpoint) // returns a promise
-            .then(res => res.json()) // also returns a promise
-            .then(data => cities.push(...data)); // return an array of objects, `...` so it's not nested
-
-        function findMatches(wordToMatch, cities) {
-            return cities.filter(place => {
-                const regex = new RegExp(wordToMatch, 'gi');
-                return place.city.match(regex) || place.state.match(regex);
-            });
-        }
     </script>
 
 </body>
