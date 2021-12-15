@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Lab 6: Theophile Sadio Nanzo</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css" />
+    <script src="script.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <form class="search-form">
+
+        <section class="columns is-mobile is-centered notification is-medium">
+            <div class="column is-5 notification is-medium">
+                <div class="notification is-info">
+                    <input type="text" class="search" placeholder="City">
+                    <ul class="suggestions">
+                        <li>
+                            Filter By City
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </form>
+
+    <script>
+        const endpoint = 'https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json';
+        const cities = [];
+
+        fetch(endpoint)
+            .then(new_file => new_file.json())
+            .then(data => cities.push(...data));
+
+        function find_matches(match, cities) {
+            return cities.filter(place => {
+                const regex = new RegExp(match, 'gi');
+                return place.city.match(regex);
+            });
+        }
+
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+
+        function display_matches() {
+            const matchArray = find_matches(this.value, cities);
+            const html = matchArray.map(place => {
+                const regex = new RegExp(this.value, 'gi');
+                const city_name = place.city.replace(regex, `<span class="hl">${this.value}</span>`);
+
+                return `<li><span class="name">${city_name}</span>
+    <span class="name">${numberWithCommas(place.name)}</span>
+    <span class="category">${numberWithCommas(place.category)}</span>
+      </li>`
+            }).join('');
+            suggestions.innerHTML = html;
+        }
+
+
+        const searchInput = document.querySelector('.search');
+        const suggestions = document.querySelector('.suggestions');
+        searchInput.addEventListener('change', display_matches);
+        searchInput.addEventListener('keyup', display_matches);
+    </script>
+
+
+</body>
+
+</html>
